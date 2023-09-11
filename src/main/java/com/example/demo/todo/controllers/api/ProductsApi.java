@@ -1,9 +1,6 @@
 package com.example.demo.todo.controllers.api;
 
-import com.example.demo.todo.dto.NewProductDto;
-import com.example.demo.todo.dto.ProductDto;
-import com.example.demo.todo.dto.UserDto;
-import com.example.demo.todo.dto.UsersPage;
+import com.example.demo.todo.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -12,10 +9,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,12 +23,12 @@ public interface ProductsApi {
             @ApiResponse(responseCode = "200", description = "Страница с товарами",
                     content = {
                             @Content(mediaType = "application/json",
-                                    schema = @Schema(implementation = ProductDto.class))
+                                    schema = @Schema(implementation = ProductPage.class))
                     }
             )
     })
     @GetMapping
-    List<ProductDto> getAll();
+    ProductPage getAll();
 
     @Operation(summary = "Создание нового товара")
     @ApiResponses(value = {
@@ -48,4 +42,43 @@ public interface ProductsApi {
 
     @PostMapping
     ResponseEntity<ProductDto> createProduct(@RequestBody NewProductDto newProduct);
+
+    @Operation(summary = "Удаление товара")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Удаление товара по ID",
+                    content = {
+                            @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = ProductDto.class))
+                    }
+            )
+    })
+    @DeleteMapping(value = "/{id}")
+    ResponseEntity<ProductDto> deleteProduct(@PathVariable ("id") String productId);
+
+    @Operation(summary = "Обновление товара")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Обновление товара по ID",
+                    content = {
+                            @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = ProductDto.class))
+                    }
+            )
+    })
+
+    @PutMapping(value = "/{id}")
+    ResponseEntity<ProductDto> updateProduct(@PathVariable ("id") String productId, @RequestBody NewProductDto newProduct);
+
+
+    @Operation(summary = "Получение товара")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Получение товара по ID",
+                    content = {
+                            @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = ProductDto.class))
+                    }
+            )
+    })
+    @GetMapping(value = "/{id}")
+    ResponseEntity<ProductDto> getById(@PathVariable ("id") String productId);
+
 }

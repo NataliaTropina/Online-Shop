@@ -1,25 +1,25 @@
 package com.example.demo.todo.models;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Document
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Document(collection = "products")
-public class Product {
+public class Cart {
+
     @Id
     private String id;
-    private String name;
-    private String description;
-    private String imageURL;
-    private String country;
-    private String categoryId;
-    private double price;
-    private int quantity;
-
+    private User user;
+    private List<Product> cartDetails = new ArrayList<>();
 }
