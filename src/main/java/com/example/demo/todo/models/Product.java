@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @AllArgsConstructor
@@ -18,7 +19,8 @@ public class Product {
     private String description;
     private String imageURL;
     private String country;
-    private String categoryId;
+    @DBRef
+    private Category category;
     private double price;
     private int quantity;
 

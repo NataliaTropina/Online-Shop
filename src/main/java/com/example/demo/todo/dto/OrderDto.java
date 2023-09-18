@@ -22,6 +22,7 @@ public class OrderDto {
     private String userId;
     private List<String> orderItemsIds;
     private LocalDate orderDate;
+    private double totalPrice;
     private Order.Status status;
 
     public static OrderDto from (Order order) {
@@ -30,6 +31,7 @@ public class OrderDto {
                 .userId(order.getUser().getId())
                 .orderItemsIds(order.getOrderItems().stream().map(OrderItems::getId).collect(Collectors.toList()))
                 .orderDate(order.getOrderDate())
+                .totalPrice(order.getTotalPrice())
                 .status(order.getStatus())
                 .build();
     }

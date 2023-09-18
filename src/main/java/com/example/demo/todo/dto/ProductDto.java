@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 @Data
 @Builder
 public class ProductDto {
+    private String id;
     private String name;
     private String description;
     private String imageURL;
@@ -25,11 +26,12 @@ public class ProductDto {
 
     public static ProductDto from (Product product){
         return ProductDto.builder()
+                .id(product.getId())
                 .name(product.getName())
                 .description(product.getDescription())
                 .imageURL(product.getImageURL())
                 .country(product.getCountry())
-                .categoryId(product.getCategoryId())
+                .categoryId(product.getCategory().getId())
                 .price(product.getPrice())
                 .quantity(product.getQuantity())
                 .build();

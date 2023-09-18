@@ -42,11 +42,32 @@ public class OrdersServiceImpl implements OrdersService {
                         new NotFoundException("User with id <" + currentUser.getUser().getId() + "> not found")
                         );
 
+        double totalOrderPrice = 0.0;
+
+        for(OrderItems orderItems : newOrder.getOrderItems()){
+
+            Product product = productsRepository.findById(orderItems.getProductId())
+                    .orElseThrow(()->
+                            new NotFoundException("Product with id <" + orderItems.getProductId() + "> not found")
+                            );
+            if(product.getQuantity() < orderItems.getQuantity()){
+                throw new NotFoundException("Insufficient quantity for product with id <" + product.getId() + ">");
+            }
+
+            product.setQuantity(product.getQuantity() - orderItems.getQuantity());
+            productsRepository.save(product);
+
+            double itemPrice = orderItems.getQuantity() * product.getPrice();
+
+            totalOrderPrice += itemPrice;
+        }
 
         Order order = Order.builder()
                 .orderDate(newOrder.getOrderDate())
                 .orderItems(newOrder.getOrderItems())
                 .user(user)
+                .totalPrice(totalOrderPrice)
+                .status((Order.Status.PROCESSING))
                 .build();
 
         ordersRepository.save(order);
@@ -88,7 +109,6 @@ public class OrdersServiceImpl implements OrdersService {
             order.setOrderItems(newOrder.getOrderItems());
         } else {
             order.setOrderItems(newOrder.getOrderItems());
-            order.setOrderDate(newOrder.getOrderDate());
             order.setStatus(newOrder.getStatus());
         }
         ordersRepository.save(order);
