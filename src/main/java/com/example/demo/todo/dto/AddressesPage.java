@@ -1,6 +1,7 @@
 package com.example.demo.todo.dto;
 
-import com.example.demo.todo.models.Cart;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,8 +13,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class NewOrderItemsDto {
+@Schema(description = "Page with addresses")
+public class AddressesPage {
 
-    private List<String> orderItemsIds;
-    private int quantity;
+    @Schema(description = "addresses")
+    private List<AddressDto> data;
+
 }

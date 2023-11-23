@@ -1,7 +1,7 @@
 package com.example.demo.todo.dto;
 
 import com.example.demo.todo.models.Order;
-import com.example.demo.todo.models.OrderItems;
+import com.example.demo.todo.models.Cart;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +17,6 @@ import java.util.List;
 @Builder
 public class NewOrderDto {
 
-    private List<OrderItems> orderItems;
     private LocalDate orderDate;
     private Order.Status status;
 

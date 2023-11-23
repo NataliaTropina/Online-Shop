@@ -3,9 +3,7 @@ package com.example.demo.todo.models;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.time.LocalDate;
-import java.util.List;
 
 @Document
 @Builder
@@ -21,7 +19,7 @@ public class Order {
     @Id
     private String id;
     private User user;
-    private List<OrderItems> orderItems;
+    private Cart cart;
     private double totalPrice;
     private LocalDate orderDate;
     private Status status;

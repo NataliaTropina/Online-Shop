@@ -10,7 +10,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
-import org.springframework.data.domain.jaxb.SpringDataJaxb;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -34,8 +33,7 @@ public interface OrdersApi {
     })
 
     @PostMapping
-    ResponseEntity<OrderDto> createOrder (@RequestBody NewOrderDto newOrder,
-                                          @Parameter(hidden = true)
+    ResponseEntity<OrderDto> createOrder (@Parameter(hidden = true)
                                           @AuthenticationPrincipal AuthenticatedUser currentUser);
 
     @Operation(summary = "Получение списка всех заказов", description = "заказов доступно только администратору")
@@ -76,7 +74,6 @@ public interface OrdersApi {
 
     @PutMapping(value = "/{id}")
     ResponseEntity<OrderDto> updateOrder (@PathVariable("id") String id,
-                                         @RequestBody NewOrderDto newOrder,
                                          @Parameter(hidden = true)
                                          @AuthenticationPrincipal AuthenticatedUser currentUser);
 

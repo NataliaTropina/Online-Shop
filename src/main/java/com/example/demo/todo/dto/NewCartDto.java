@@ -1,19 +1,18 @@
 package com.example.demo.todo.dto;
 
-import com.example.demo.todo.models.Cart;
+import com.example.demo.todo.models.CartDetails;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class NewOrderItemsDto {
+public class NewCartDto {
 
-    private List<String> orderItemsIds;
-    private int quantity;
+    private List<CartDetails> cartDetails;
+
 }

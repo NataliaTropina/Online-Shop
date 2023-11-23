@@ -3,7 +3,9 @@ package com.example.demo.todo.services.impl;
 
 import com.example.demo.todo.dto.NewUserDto;
 import com.example.demo.todo.dto.UserDto;
+import com.example.demo.todo.models.Cart;
 import com.example.demo.todo.models.User;
+import com.example.demo.todo.repositories.CartRepository;
 import com.example.demo.todo.repositories.UsersRepository;
 import com.example.demo.todo.services.SignUpService;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +18,7 @@ public class SignUpServiceImpl implements SignUpService {
 
     private final UsersRepository usersRepository;
     private final PasswordEncoder passwordEncoder;
+    private final CartRepository cartRepository;
 
     @Override
     public UserDto signUp(NewUserDto newUser) {
@@ -27,6 +30,11 @@ public class SignUpServiceImpl implements SignUpService {
                 .hashPassword(passwordEncoder.encode(newUser.getPassword()))
                 .role(User.Role.USER)
                 .build();
+
+        Cart cart = new Cart();
+        cartRepository.save(cart);
+
+        user.setCart(cart);
 
         usersRepository.save(user);
 

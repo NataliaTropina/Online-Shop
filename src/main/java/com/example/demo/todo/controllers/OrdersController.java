@@ -1,6 +1,7 @@
 package com.example.demo.todo.controllers;
 
 import com.example.demo.todo.controllers.api.OrdersApi;
+import com.example.demo.todo.dto.NewAddressDto;
 import com.example.demo.todo.dto.NewOrderDto;
 import com.example.demo.todo.dto.OrderDto;
 import com.example.demo.todo.dto.OrdersPage;
@@ -21,10 +22,10 @@ public class OrdersController implements OrdersApi {
 
     @Override
     @PreAuthorize("hasAuthority('USER')")
-    public ResponseEntity<OrderDto> createOrder(NewOrderDto newOrder, AuthenticatedUser currentUser) {
+    public ResponseEntity<OrderDto> createOrder(AuthenticatedUser currentUser) {
         return ResponseEntity
                 .status(201)
-                .body(ordersService.createOrder(newOrder, currentUser));
+                .body(ordersService.createOrder(currentUser));
     }
 
     @Override
@@ -41,10 +42,10 @@ public class OrdersController implements OrdersApi {
 
     @Override
     @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
-    public ResponseEntity<OrderDto> updateOrder(String id, NewOrderDto newOrder, AuthenticatedUser currentUser) {
+    public ResponseEntity<OrderDto> updateOrder(String id, AuthenticatedUser currentUser) {
         return ResponseEntity
                 .status(201)
-                .body(ordersService.updateOrder(id, currentUser, newOrder));
+                .body(ordersService.updateOrder(id, currentUser));
     }
 
     @Override

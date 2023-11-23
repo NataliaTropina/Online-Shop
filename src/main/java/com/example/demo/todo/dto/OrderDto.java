@@ -1,8 +1,7 @@
 package com.example.demo.todo.dto;
 
 import com.example.demo.todo.models.Order;
-import com.example.demo.todo.models.OrderItems;
-import com.example.demo.todo.models.Product;
+import com.example.demo.todo.models.Cart;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,7 +19,7 @@ public class OrderDto {
 
     private String id;
     private String userId;
-    private List<String> orderItemsIds;
+    private String cartId;
     private LocalDate orderDate;
     private double totalPrice;
     private Order.Status status;
@@ -29,7 +28,7 @@ public class OrderDto {
         return OrderDto.builder()
                 .id(order.getId())
                 .userId(order.getUser().getId())
-                .orderItemsIds(order.getOrderItems().stream().map(OrderItems::getId).collect(Collectors.toList()))
+                .cartId(order.getCart().getId())
                 .orderDate(order.getOrderDate())
                 .totalPrice(order.getTotalPrice())
                 .status(order.getStatus())
