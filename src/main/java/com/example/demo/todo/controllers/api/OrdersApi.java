@@ -74,8 +74,9 @@ public interface OrdersApi {
 
     @PutMapping(value = "/{id}")
     ResponseEntity<OrderDto> updateOrder (@PathVariable("id") String id,
-                                         @Parameter(hidden = true)
-                                         @AuthenticationPrincipal AuthenticatedUser currentUser);
+                                          @Parameter(hidden = true)
+                                          @AuthenticationPrincipal AuthenticatedUser currentUser,
+                                          @RequestBody NewOrderDto newOrder);
 
 
     @Operation(summary = "Удаление заказа")

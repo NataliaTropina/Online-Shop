@@ -13,6 +13,6 @@ import java.util.List;
 @Builder
 public class NewCartDto {
 
-    private List<CartDetails> cartDetails;
+    private List<NewCartDetailsDto> cartDetails;
 
 }

@@ -1,11 +1,15 @@
 package com.example.demo.todo.dto;
 
+import com.example.demo.todo.models.Address;
+import com.example.demo.todo.models.Cart;
+import com.example.demo.todo.models.Order;
 import com.example.demo.todo.models.User;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,6 +30,10 @@ public class UserDto {
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
     private String phone;
+    private User.Role role;
+    private String cartId;
+    private List<String> addressIds;
+    private List<String> orderIds;
 
 
     public static UserDto from(User user) {
@@ -37,6 +45,10 @@ public class UserDto {
                 .phone(user.getPhone())
                 .createdDate(user.getCreatedDate())
                 .updatedDate(user.getUpdatedDate())
+                .role(user.getRole())
+                .cartId(user.getCart().getId())
+                .addressIds(user.getAddresses().stream().map(Address::getId).collect(Collectors.toList()))
+                .orderIds(user.getOrders().stream().map(Order::getId).collect(Collectors.toList()))
                 .build();
     }
 

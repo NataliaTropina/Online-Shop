@@ -1,20 +1,18 @@
 package com.example.demo.todo.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Document(collection = "users")
+@ToString(exclude = {"cart", "addresses", "orders"})
 public class User {
 
     public enum Role {
@@ -33,5 +31,8 @@ public class User {
     private Role role;
     @DBRef
     private Cart cart = new Cart();
-    private Address address;
+    @DBRef
+    private List<Address> addresses;
+    @DBRef
+    private List<Order> orders;
 }

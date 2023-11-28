@@ -1,12 +1,11 @@
 package com.example.demo.todo.dto;
 
+import com.example.demo.todo.models.CartDetails;
 import com.example.demo.todo.models.Order;
-import com.example.demo.todo.models.Cart;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,7 +18,7 @@ public class OrderDto {
 
     private String id;
     private String userId;
-    private String cartId;
+    private List<String> cartDetailsIds;
     private LocalDate orderDate;
     private double totalPrice;
     private Order.Status status;
@@ -28,7 +27,7 @@ public class OrderDto {
         return OrderDto.builder()
                 .id(order.getId())
                 .userId(order.getUser().getId())
-                .cartId(order.getCart().getId())
+                .cartDetailsIds(order.getCartDetails().stream().map(CartDetails::getId).collect(Collectors.toList()))
                 .orderDate(order.getOrderDate())
                 .totalPrice(order.getTotalPrice())
                 .status(order.getStatus())

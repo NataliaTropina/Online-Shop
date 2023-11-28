@@ -42,10 +42,10 @@ public class OrdersController implements OrdersApi {
 
     @Override
     @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
-    public ResponseEntity<OrderDto> updateOrder(String id, AuthenticatedUser currentUser) {
+    public ResponseEntity<OrderDto> updateOrder(String id, AuthenticatedUser currentUser, NewOrderDto newOrder) {
         return ResponseEntity
                 .status(201)
-                .body(ordersService.updateOrder(id, currentUser));
+                .body(ordersService.updateOrder(id, currentUser, newOrder));
     }
 
     @Override

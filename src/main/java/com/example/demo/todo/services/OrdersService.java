@@ -16,7 +16,7 @@ public interface OrdersService {
 
     OrderDto getById(String id);
 
-    OrderDto updateOrder (String id, AuthenticatedUser currentUser);
+    OrderDto updateOrder (String id, AuthenticatedUser currentUser, NewOrderDto newOrder);
 
     OrderDto deleteById (String id);
 }
