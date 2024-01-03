@@ -42,8 +42,6 @@ public class InitialDataRunner implements CommandLineRunner {
 
             alisher = User.builder()
                     .email("alisher@ait-tr.de")
-                   // .address(address)
-                   // .cart(cart)
                     .role(User.Role.USER)
                     .hashPassword("$2a$10$RVSHTssubxIkoAl3rQ58UedU8sPMM6FZRxg1icrJg07f.MQAMRpDy") // alisher
                     .build();

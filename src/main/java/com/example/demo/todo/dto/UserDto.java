@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,7 +39,7 @@ public class UserDto {
 
 
     public static UserDto from(User user) {
-        return UserDto.builder()
+        UserDto.UserDtoBuilder userDtoBuilder = UserDto.builder()
                 .id(user.getId())
                 .email(user.getEmail())
                 .firstName(user.getFirstName())
@@ -45,12 +47,31 @@ public class UserDto {
                 .phone(user.getPhone())
                 .createdDate(user.getCreatedDate())
                 .updatedDate(user.getUpdatedDate())
-                .role(user.getRole())
-                .cartId(user.getCart().getId())
-                .addressIds(user.getAddresses().stream().map(Address::getId).collect(Collectors.toList()))
-                .orderIds(user.getOrders().stream().map(Order::getId).collect(Collectors.toList()))
-                .build();
+                .role(user.getRole());
+
+        if (user.getRole() == User.Role.ADMIN) {
+
+            userDtoBuilder
+                    .addressIds(Collections.singletonList("Not available for admin"))
+                    .orderIds(Collections.singletonList("Not available for admin"))
+                    .cartId("Not available for admin");
+        } else {
+            if (user.getCart() != null || user.getCart().getCartDetails().isEmpty()) {
+                userDtoBuilder.cartId(user.getCart().getId());
+            } else {
+
+                userDtoBuilder.cartId("No cart available");
+            }
+            userDtoBuilder
+                    .cartId(user.getCart().getId())
+                    .orderIds(user.getOrders().stream().map(Order::getId).collect(Collectors.toList()))
+                    .addressIds(user.getAddresses().stream().map(Address::getId).collect(Collectors.toList()));
+        }
+
+        return userDtoBuilder.build();
     }
+
+
 
     public static List<UserDto> from(List<User> users) {
         return users.stream()

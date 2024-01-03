@@ -47,7 +47,20 @@ public class ProductsController implements ProductsApi {
         return ResponseEntity.ok(productService.getById(productId));
     }
 
+    @Override
+    public ProductPage nameFilter(String name) {
+        return productService.nameFilter(name);
+    }
 
+    @Override
+    public ProductPage categoryFilter(String category) {
+        return productService.categoryFilter(category);
+    }
+
+    @Override
+    public ProductPage priceFilter(double startPrice, double endPrice) {
+        return productService.priceFilter(startPrice, endPrice);
+    }
 
 
 }

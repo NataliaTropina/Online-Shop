@@ -103,4 +103,34 @@ public class ProductsServiceImpl implements ProductService {
 
         return ProductDto.from(product);
     }
+
+    @Override
+    public ProductPage nameFilter(String name) {
+
+        List<Product> productsByName = productsRepository.findAllByName(name);
+
+        return ProductPage.builder()
+                .data(ProductDto.from(productsByName))
+                .build();
+    }
+
+    @Override
+    public ProductPage categoryFilter(String category) {
+
+        List<Product> productsByCategory = productsRepository.findAllByCategory(category);
+
+        return ProductPage.builder()
+                .data(ProductDto.from(productsByCategory))
+                .build();
+    }
+
+    @Override
+    public ProductPage priceFilter(double startPrice, double endPrice) {
+
+        List<Product> productsByPrice = productsRepository.findAllByPriceBetween(startPrice, endPrice);
+
+        return ProductPage.builder()
+                .data(ProductDto.from(productsByPrice))
+                .build();
+    }
 }

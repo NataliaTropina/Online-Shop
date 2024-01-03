@@ -45,7 +45,8 @@ public class OrdersController implements OrdersApi {
     public ResponseEntity<OrderDto> updateOrder(String id, AuthenticatedUser currentUser, NewOrderDto newOrder) {
         return ResponseEntity
                 .status(201)
-                .body(ordersService.updateOrder(id, currentUser, newOrder));
+                .body(ordersService.updateOrder(id, currentUser, newOrder
+                ));
     }
 
     @Override

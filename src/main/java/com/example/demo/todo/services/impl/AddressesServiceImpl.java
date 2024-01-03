@@ -12,6 +12,8 @@ import com.example.demo.todo.services.AddressesService;
 import lombok.*;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -39,6 +41,10 @@ public class AddressesServiceImpl implements AddressesService {
                 .build();
 
         addressRepository.save(address);
+
+        List<Address> addresses = user.getAddresses();
+        addresses.add(address);
+        user.setAddresses(addresses);
 
         return AddressDto.from(address);
     }

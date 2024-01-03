@@ -17,4 +17,10 @@ public interface ProductService  {
     ProductDto updateProduct (String productId, NewProductDto newProduct);
 
     ProductDto getById (String productId);
+
+    ProductPage nameFilter (String name);
+
+    ProductPage categoryFilter (String category);
+
+    ProductPage priceFilter (double startPrice, double endPrice);
 }

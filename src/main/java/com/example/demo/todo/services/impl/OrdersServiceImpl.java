@@ -115,8 +115,10 @@ public class OrdersServiceImpl implements OrdersService {
 
     private void saveOrderAndHandleData(Cart userCart){
 
-        userCart.getCartDetails().clear();
-        cartRepository.save(userCart);
+
+
+        //userCart.getCartDetails().clear();
+        cartRepository.deleteById(userCart.getId());
     }
 
     @Override
