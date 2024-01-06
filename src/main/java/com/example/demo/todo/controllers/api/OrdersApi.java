@@ -36,9 +36,9 @@ public interface OrdersApi {
     ResponseEntity<OrderDto> createOrder (@Parameter(hidden = true)
                                           @AuthenticationPrincipal AuthenticatedUser currentUser);
 
-    @Operation(summary = "Получение списка всех заказов", description = "заказов доступно только администратору")
+    @Operation(summary = "Get list of all orders", description = "accessible only to administrators")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Страница с заказами",
+            @ApiResponse(responseCode = "200", description = "Page with orders",
                     content = {
                             @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = OrdersPage.class))
@@ -49,9 +49,9 @@ public interface OrdersApi {
     @GetMapping
     OrdersPage getAll ();
 
-    @Operation(summary = "Получение заказа по ID", description = "Доступно только администратору")
+    @Operation(summary = "Get order by ID", description = "accessible only to administrators")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "заказ по ID",
+            @ApiResponse(responseCode = "200", description = "order by ID",
                     content = {
                             @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = OrderDto.class))
@@ -62,9 +62,9 @@ public interface OrdersApi {
     @GetMapping(value = "/{id}")
     OrderDto getById (@PathVariable("id") String id);
 
-    @Operation(summary = "Обновление заказа")
+    @Operation(summary = "Update order")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Обновление заказа по ID",
+            @ApiResponse(responseCode = "201", description = "Update order by ID",
                     content = {
                             @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = OrderDto.class))
@@ -79,9 +79,9 @@ public interface OrdersApi {
                                           @RequestBody NewOrderDto newOrder);
 
 
-    @Operation(summary = "Удаление заказа")
+    @Operation(summary = "Delete order")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Удаление заказа по ID",
+            @ApiResponse(responseCode = "200", description = "Delete order by ID",
                     content = {
                             @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = OrderDto.class))

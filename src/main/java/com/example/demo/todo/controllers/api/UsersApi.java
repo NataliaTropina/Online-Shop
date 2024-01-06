@@ -24,15 +24,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/users")
 public interface UsersApi {
 
-    @Operation(summary = "Получение своего профиля", description = "Доступно только аутентифицированному пользователю")
+    @Operation(summary = "Get own profile", description = "Accessible only to authenticated users")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Информацию о профиле",
+            @ApiResponse(responseCode = "200", description = "Profile information",
                     content = {
                             @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = ProfileDto.class))
                     }
             ),
-            @ApiResponse(responseCode = "403", description = "Пользователь не аутентифицирован",
+            @ApiResponse(responseCode = "403", description = "User not authenticated",
                     content = {
                             @Content(mediaType = "application/json",
                                     schema = @Schema(ref = "StandardResponseDto"))
@@ -45,9 +45,9 @@ public interface UsersApi {
                                           @AuthenticationPrincipal AuthenticatedUser currentUser);
 
 
-    @Operation(summary = "Получение списка пользователей", description = "Доступно только администратору")
+    @Operation(summary = "Get list of users", description = "Accessible only to administrators")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Страница с пользователями",
+            @ApiResponse(responseCode = "200", description = "Page with users",
                     content = {
                             @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = UsersPage.class))
@@ -59,9 +59,9 @@ public interface UsersApi {
     ResponseEntity<UsersPage> getAll();
 
 
-    @Operation(summary = "Удаление пользователя по ID", description = "Доступно только администратору")
+    @Operation(summary = "Delete user by ID", description = "Accessible only to administrators")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Удаление пользователя по ID",
+            @ApiResponse(responseCode = "200", description = "Delete user by ID",
                     content = {
                             @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = UserDto.class))
@@ -71,9 +71,9 @@ public interface UsersApi {
     @DeleteMapping(value = "/{id}")
     ResponseEntity<UserDto> deleteUserById(@PathVariable("id") String userId);
 
-    @Operation(summary = "Получение пользователя по ID", description = "Доступно только администратору")
+    @Operation(summary = "Get user by ID", description = "Accessible only to administrators")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Пользователь по ID",
+            @ApiResponse(responseCode = "200", description = "User by ID",
                     content = {
                             @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = UserDto.class))
@@ -83,15 +83,15 @@ public interface UsersApi {
     @GetMapping(value = "/{id}")
     ResponseEntity<UserDto> getUserById(@PathVariable("id") String userId);
 
-    @Operation(summary = "Обновление данных пользователя и сохранение в базу данных", description = "Доступно только администратору")
+    @Operation(summary = "Update user data and save to the database", description = "Accessible only to administrators")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Обновление пользователя по ID",
+            @ApiResponse(responseCode = "200", description = "Update user by ID",
                     content = {
                             @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = UserDto.class))
                     }
             ),
-            @ApiResponse(responseCode = "403", description = "Пользователь не аутентифицирован",
+            @ApiResponse(responseCode = "403", description = "User not authenticated",
                     content = {
                             @Content(mediaType = "application/json",
                                     schema = @Schema(ref = "StandardResponseDto"))

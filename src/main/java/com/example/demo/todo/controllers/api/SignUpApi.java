@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/api/register")
 public interface SignUpApi {
 
-    @Operation(summary = "Регистрация пользователя")
+    @Operation(summary = "User registration")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Зарегистрированный пользователь",
+            @ApiResponse(responseCode = "201", description = "Registered user",
                     content = {
                             @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = UserDto.class))

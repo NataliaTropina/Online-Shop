@@ -18,9 +18,9 @@ import java.util.List;
 })
 @RequestMapping("/api/products")
 public interface ProductsApi {
-    @Operation(summary = "Получение списка товаров", description = "доступно всем")
+    @Operation(summary = "Get list of products", description = "accessible to all")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Страница с товарами",
+            @ApiResponse(responseCode = "200", description = "Page with products",
                     content = {
                             @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = ProductPage.class))
@@ -30,9 +30,9 @@ public interface ProductsApi {
     @GetMapping
     ProductPage getAll();
 
-    @Operation(summary = "Создание нового товара")
+    @Operation(summary = "Create new product")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "новый товар",
+            @ApiResponse(responseCode = "201", description = "new product",
                     content = {
                             @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = ProductDto.class))
@@ -43,9 +43,9 @@ public interface ProductsApi {
     @PostMapping
     ResponseEntity<ProductDto> createProduct(@RequestBody NewProductDto newProduct);
 
-    @Operation(summary = "Удаление товара")
+    @Operation(summary = "Delete product")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Удаление товара по ID",
+            @ApiResponse(responseCode = "201", description = "Delete product by ID",
                     content = {
                             @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = ProductDto.class))
@@ -55,9 +55,9 @@ public interface ProductsApi {
     @DeleteMapping(value = "/{id}")
     ResponseEntity<ProductDto> deleteProduct(@PathVariable ("id") String productId);
 
-    @Operation(summary = "Обновление товара")
+    @Operation(summary = "Update product")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Обновление товара по ID",
+            @ApiResponse(responseCode = "201", description = "Update product by ID",
                     content = {
                             @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = ProductDto.class))
@@ -69,9 +69,9 @@ public interface ProductsApi {
     ResponseEntity<ProductDto> updateProduct(@PathVariable ("id") String productId, @RequestBody NewProductDto newProduct);
 
 
-    @Operation(summary = "Получение товара")
+    @Operation(summary = "Get product")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Получение товара по ID",
+            @ApiResponse(responseCode = "200", description = "Get product by ID",
                     content = {
                             @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = ProductDto.class))
@@ -81,9 +81,9 @@ public interface ProductsApi {
     @GetMapping(value = "/{id}")
     ResponseEntity<ProductDto> getById(@PathVariable ("id") String productId);
 
-    @Operation(summary = "Получение списка товаров по названию", description = "доступно всем")
+    @Operation(summary = "Get list of products by name", description = "accessible to all")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Страница с товарами",
+            @ApiResponse(responseCode = "200", description = "Page with products",
                     content = {
                             @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = ProductPage.class))
@@ -94,9 +94,9 @@ public interface ProductsApi {
     @GetMapping(value = "/by/name/{name}")
     ProductPage nameFilter(@PathVariable String name);
 
-    @Operation(summary = "Получение списка товаров по категории", description = "доступно всем")
+    @Operation(summary = "Get list of products by category", description = "accessible to all")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Страница с товарами",
+            @ApiResponse(responseCode = "200", description = "Page with products",
                     content = {
                             @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = ProductPage.class))
@@ -106,9 +106,9 @@ public interface ProductsApi {
     @GetMapping(value = "/by/category/{category}")
     ProductPage categoryFilter(@PathVariable String category);
 
-    @Operation(summary = "Получение списка товаров по цене", description = "доступно всем")
+    @Operation(summary = "Get list of products by price", description = "accessible to all")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Страница с товарами",
+            @ApiResponse(responseCode = "200", description = "Page with products",
                     content = {
                             @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = ProductPage.class))

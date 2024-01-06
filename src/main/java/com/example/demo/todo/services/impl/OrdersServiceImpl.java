@@ -9,8 +9,6 @@ import com.example.demo.todo.services.OrdersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -27,27 +25,25 @@ public class OrdersServiceImpl implements OrdersService {
 
     @Override
     public OrderDto createOrder(AuthenticatedUser currentUser) {
-        // Получение пользователя и создание адреса
 
+        // Retrieving the user and creating an address
         User user = getUserWithAddress(currentUser, new NewAddressDto());
 
 
-        // Проверка корзины пользователя
+        // Checking the user's cart
         checkUserCart(user);
 
-        // Обработка элементов корзины
+        // Processing items in the cart
         double totalOrderPrice = countTotalOrderPrice(user.getCart());
 
-        // Создание заказа
+        // Creating the order
         Order order = createOrderObject(user, totalOrderPrice);
 
-        // Сохранение заказа и корректная обработка данных
-
+        // Saving the order and handling the data properly
         Cart userCart = user.getCart();
         saveOrderAndHandleData(userCart);
 
         return OrderDto.from(order);
-
     }
 
     private User getUserWithAddress (AuthenticatedUser currentUser, NewAddressDto newAddress){
@@ -173,6 +169,4 @@ public class OrdersServiceImpl implements OrdersService {
 
             return OrderDto.from(order);
         }
-
-
 }
