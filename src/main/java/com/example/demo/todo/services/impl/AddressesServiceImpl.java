@@ -1,6 +1,7 @@
 package com.example.demo.todo.services.impl;
 
 import com.example.demo.todo.dto.AddressDto;
+import com.example.demo.todo.dto.AddressesPage;
 import com.example.demo.todo.dto.NewAddressDto;
 import com.example.demo.todo.exceptions.NotFoundException;
 import com.example.demo.todo.models.Address;
@@ -12,7 +13,6 @@ import com.example.demo.todo.services.AddressesService;
 import lombok.*;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -40,12 +40,59 @@ public class AddressesServiceImpl implements AddressesService {
                 .user(user)
                 .build();
 
-        addressRepository.save(address);
+        user.getAddresses().add(address);
 
-        List<Address> addresses = user.getAddresses();
-        addresses.add(address);
-        user.setAddresses(addresses);
+        addressRepository.save(address);
+        usersRepository.save(user);
 
         return AddressDto.from(address);
+    }
+
+    @Override
+    public AddressDto updateAddress (NewAddressDto newAddress, String id) {
+
+       Address addressById = addressRepository.findById(id)
+                       .orElseThrow(()->
+                               new NotFoundException("Address with ID < + currentUser.getUser().getId() + not found"));
+
+       addressById.setCity(newAddress.getCity());
+       addressById.setCountry(newAddress.getCountry());
+       addressById.setStreet(newAddress.getStreet());
+       addressById.setPostcode(newAddress.getPostcode());
+       addressById.setHouseNumber(newAddress.getHouseNumber());
+
+       addressRepository.save(addressById);
+
+        return AddressDto.from(addressById);
+    }
+
+    @Override
+    public AddressDto deleteAddress(String id, AuthenticatedUser currentUser) {
+
+        User user = usersRepository.findById(currentUser.getUser().getId())
+                .orElseThrow(()->
+                        new NotFoundException("User with id <" + currentUser.getUser().getId() + "> not found"));
+
+        Address addressById = addressRepository.findById(id)
+                .orElseThrow(()->
+                        new NotFoundException("Address with ID <" + id + "not found"));
+
+        addressRepository.deleteById(id);
+
+        return AddressDto.from(addressById);
+    }
+
+    @Override
+    public AddressesPage getAddressesByUser(AuthenticatedUser currentUser) {
+
+        User user = usersRepository.findById(currentUser.getUser().getId())
+                .orElseThrow(()->
+                        new NotFoundException("User with id <" + currentUser.getUser().getId() + "> not found"));
+
+        List<Address> addressesByUser = addressRepository.getAllByUser(user);
+
+        return AddressesPage.builder()
+                .data(AddressDto.from(addressesByUser))
+                .build();
     }
 }
