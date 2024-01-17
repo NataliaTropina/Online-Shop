@@ -1,6 +1,8 @@
 package com.example.demo.todo.controllers.api;
 
-import com.example.demo.todo.dto.*;
+import com.example.demo.todo.dto.NewProductDto;
+import com.example.demo.todo.dto.ProductDto;
+import com.example.demo.todo.dto.ProductPage;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -10,8 +12,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Tags(value = {
         @Tag(name = "Products")
@@ -53,7 +53,7 @@ public interface ProductsApi {
             )
     })
     @DeleteMapping(value = "/{id}")
-    ResponseEntity<ProductDto> deleteProduct(@PathVariable ("id") String productId);
+    ResponseEntity<ProductDto> deleteProduct(@PathVariable("id") String productId);
 
     @Operation(summary = "Update product")
     @ApiResponses(value = {
@@ -66,7 +66,7 @@ public interface ProductsApi {
     })
 
     @PutMapping(value = "/{id}")
-    ResponseEntity<ProductDto> updateProduct(@PathVariable ("id") String productId, @RequestBody NewProductDto newProduct);
+    ResponseEntity<ProductDto> updateProduct(@PathVariable("id") String productId, @RequestBody NewProductDto newProduct);
 
 
     @Operation(summary = "Get product")
@@ -79,7 +79,7 @@ public interface ProductsApi {
             )
     })
     @GetMapping(value = "/{id}")
-    ResponseEntity<ProductDto> getById(@PathVariable ("id") String productId);
+    ResponseEntity<ProductDto> getById(@PathVariable("id") String productId);
 
     @Operation(summary = "Get list of products by name", description = "accessible to all")
     @ApiResponses(value = {
@@ -117,5 +117,4 @@ public interface ProductsApi {
     })
     @GetMapping(value = "/by/price")
     ProductPage priceFilter(@RequestParam(value = "startPrice") double startPrice, @RequestParam(value = "endPrice") double endPrice);
-
 }

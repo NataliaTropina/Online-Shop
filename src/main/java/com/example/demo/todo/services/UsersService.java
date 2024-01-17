@@ -9,7 +9,7 @@ public interface UsersService {
 
     ProfileDto getProfile(String currentUserId);
 
-    UsersPage getAll();
+    UsersPage getAll(String role);
 
     UserDto deleteUserById(String userId);
 

@@ -1,9 +1,8 @@
 package com.example.demo.todo.security.datails;
 
+import com.example.demo.todo.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import com.example.demo.todo.models.User;
-
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;

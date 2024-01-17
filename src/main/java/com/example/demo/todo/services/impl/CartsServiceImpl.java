@@ -1,7 +1,6 @@
 package com.example.demo.todo.services.impl;
 
 import com.example.demo.todo.dto.CartDto;
-import com.example.demo.todo.dto.NewCartDetailsDto;
 import com.example.demo.todo.dto.NewCartDto;
 import com.example.demo.todo.exceptions.NotFoundException;
 import com.example.demo.todo.models.Cart;
@@ -15,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

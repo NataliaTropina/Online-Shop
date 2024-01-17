@@ -1,9 +1,7 @@
 package com.example.demo.todo.controllers.api;
 
 import com.example.demo.todo.dto.CartDto;
-import com.example.demo.todo.dto.CategoryDto;
 import com.example.demo.todo.dto.NewCartDto;
-import com.example.demo.todo.dto.NewCategoryDto;
 import com.example.demo.todo.security.datails.AuthenticatedUser;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -36,7 +34,7 @@ public interface CartsApi {
     })
 
     @PostMapping
-    ResponseEntity<CartDto> addToCart (@Parameter(hidden = true)
-                                       @AuthenticationPrincipal AuthenticatedUser currentUser,
-                                       @RequestBody NewCartDto newCart);
+    ResponseEntity<CartDto> addToCart(@Parameter(hidden = true)
+                                      @AuthenticationPrincipal AuthenticatedUser currentUser,
+                                      @RequestBody NewCartDto newCart);
 }

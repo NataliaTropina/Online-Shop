@@ -6,13 +6,13 @@ import com.example.demo.todo.dto.NewCategoryDto;
 
 public interface CategoriesService {
 
-    CategoryDto createCategory (NewCategoryDto newCategory);
+    CategoryDto createCategory(NewCategoryDto newCategory);
 
-    CategoryDto updateCategoryById (NewCategoryDto newCategory, String id);
+    CategoryDto updateCategoryById(NewCategoryDto newCategory, String id);
 
-    CategoriesPage getAll ();
+    CategoriesPage getAll();
 
-    CategoryDto getById (String id);
+    CategoryDto getById(String id);
 
-    CategoryDto deleteCategory (String id);
+    CategoryDto deleteCategory(String id);
 }

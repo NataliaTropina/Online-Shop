@@ -22,13 +22,7 @@ public class InitialDataRunner implements CommandLineRunner {
 
         User alisher = null;
 
-        Address address = Address.builder()
-                .Country("Germany")
-                .city("Berlin")
-                .street("Hamburgerstr.")
-                .houseNumber("55")
-                .postcode("22222")
-                .build();
+        Address address = Address.builder().Country("Germany").city("Berlin").street("Hamburgerstr.").houseNumber("55").postcode("22222").build();
 
         Cart cart = new Cart();
 

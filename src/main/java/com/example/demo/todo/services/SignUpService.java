@@ -5,5 +5,5 @@ import com.example.demo.todo.dto.UserDto;
 
 public interface SignUpService {
 
-    UserDto signUp (NewUserDto newUser);
+    UserDto signUp(NewUserDto newUser);
 }

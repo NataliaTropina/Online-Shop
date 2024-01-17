@@ -30,9 +30,9 @@ public class UsersController implements UsersApi {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @Override
-    public ResponseEntity<UsersPage> getAll() {
+    public ResponseEntity<UsersPage> getAll(String role) {
         return ResponseEntity
-                .ok(usersService.getAll());
+                .ok(usersService.getAll(role));
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")

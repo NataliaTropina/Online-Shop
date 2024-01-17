@@ -1,6 +1,5 @@
 package com.example.demo.todo.services.impl;
 
-
 import com.example.demo.todo.dto.NewUserDto;
 import com.example.demo.todo.dto.UserDto;
 import com.example.demo.todo.models.Address;
@@ -33,14 +32,7 @@ public class SignUpServiceImpl implements SignUpService {
 
     @Override
     public UserDto signUp(NewUserDto newUser) {
-        User user = User.builder()
-                .firstName(newUser.getFirstName())
-                .lastName(newUser.getLastName())
-                .email(newUser.getEmail())
-                .phone(newUser.getPhone())
-                .hashPassword(passwordEncoder.encode(newUser.getPassword()))
-                .role(User.Role.USER)
-                .build();
+        User user = User.builder().firstName(newUser.getFirstName()).lastName(newUser.getLastName()).email(newUser.getEmail()).phone(newUser.getPhone()).hashPassword(passwordEncoder.encode(newUser.getPassword())).role(User.Role.USER).build();
 
         usersRepository.save(user);
 
@@ -67,7 +59,6 @@ public class SignUpServiceImpl implements SignUpService {
         userDto.setAddressIds(addresses.stream().map(Address::getId).collect(Collectors.toList()));
         userDto.setOrderIds(orders.stream().map(Order::getId).collect(Collectors.toList()));
         userDto.setCartId(emptyCart.getId());
-
 
         return UserDto.from(user);
     }

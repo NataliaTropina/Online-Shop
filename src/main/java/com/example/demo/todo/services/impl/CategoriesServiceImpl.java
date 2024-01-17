@@ -19,8 +19,8 @@ import java.util.List;
 public class CategoriesServiceImpl implements CategoriesService {
 
     private final CategoriesRepository categoriesRepository;
-
     private final ProductsRepository productsRepository;
+
     @Override
     public CategoryDto createCategory(NewCategoryDto newCategory) {
 
@@ -41,9 +41,9 @@ public class CategoriesServiceImpl implements CategoriesService {
     public CategoryDto updateCategoryById(NewCategoryDto newCategory, String id) {
 
         Category category = categoriesRepository.findById(id)
-                .orElseThrow(()->
+                .orElseThrow(() ->
                         new NotFoundException("Category with id <" + id + "> not found")
-                        );
+                );
 
         List<Product> products = productsRepository.findAllByIdIn(newCategory.getProductIds());
 
@@ -68,9 +68,9 @@ public class CategoriesServiceImpl implements CategoriesService {
     public CategoryDto getById(String id) {
 
         Category category = categoriesRepository.findById(id)
-                .orElseThrow(()->
+                .orElseThrow(() ->
                         new NotFoundException("Category with id <" + id + "> not found")
-                        );
+                );
 
         return CategoryDto.from(category);
     }
@@ -80,7 +80,7 @@ public class CategoriesServiceImpl implements CategoriesService {
 
 
         Category category = categoriesRepository.findById(id)
-                .orElseThrow(()->
+                .orElseThrow(() ->
                         new NotFoundException("Category with id <" + id + "> not found")
                 );
 

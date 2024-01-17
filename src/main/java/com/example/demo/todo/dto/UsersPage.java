@@ -12,9 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Builder
-@Schema(description = "Страница с пользователями")
 public class UsersPage {
 
-    @Schema(description = "Пользователи")
     private List<UserDto> data;
 }

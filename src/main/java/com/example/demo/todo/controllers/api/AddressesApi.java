@@ -3,7 +3,6 @@ package com.example.demo.todo.controllers.api;
 import com.example.demo.todo.dto.AddressDto;
 import com.example.demo.todo.dto.AddressesPage;
 import com.example.demo.todo.dto.NewAddressDto;
-import com.example.demo.todo.dto.OrderDto;
 import com.example.demo.todo.security.datails.AuthenticatedUser;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -34,9 +33,9 @@ public interface AddressesApi {
     })
 
     @PostMapping
-    ResponseEntity<AddressDto> createAddress (@RequestBody NewAddressDto newAddress,
-                                              @Parameter(hidden = true)
-                                              @AuthenticationPrincipal AuthenticatedUser currentUser);
+    ResponseEntity<AddressDto> createAddress(@RequestBody NewAddressDto newAddress,
+                                             @Parameter(hidden = true)
+                                             @AuthenticationPrincipal AuthenticatedUser currentUser);
 
     @Operation(summary = "Update  address")
     @ApiResponses(value = {
@@ -49,8 +48,8 @@ public interface AddressesApi {
     })
 
     @PutMapping(value = "/{id}")
-    ResponseEntity<AddressDto> updateAddress (@RequestBody NewAddressDto newAddress,
-                                              @PathVariable String id);
+    ResponseEntity<AddressDto> updateAddress(@RequestBody NewAddressDto newAddress,
+                                             @PathVariable String id);
 
     @Operation(summary = "Delete  address")
     @ApiResponses(value = {
@@ -62,9 +61,9 @@ public interface AddressesApi {
             )
     })
     @DeleteMapping("/{id}")
-    ResponseEntity<AddressDto> deleteAddress (@PathVariable("id") String id,
-                                              @Parameter(hidden = true)
-                                              @AuthenticationPrincipal AuthenticatedUser currentUser);
+    ResponseEntity<AddressDto> deleteAddress(@PathVariable("id") String id,
+                                             @Parameter(hidden = true)
+                                             @AuthenticationPrincipal AuthenticatedUser currentUser);
 
     @Operation(summary = "Get addresses by user")
     @ApiResponses(value = {
@@ -76,7 +75,7 @@ public interface AddressesApi {
             )
     })
     @GetMapping("/by-user")
-    AddressesPage getAddressesByUser (@Parameter(hidden = true)
-                                         @AuthenticationPrincipal AuthenticatedUser currentUser);
+    AddressesPage getAddressesByUser(@Parameter(hidden = true)
+                                     @AuthenticationPrincipal AuthenticatedUser currentUser);
 
 }

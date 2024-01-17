@@ -7,11 +7,11 @@ import com.example.demo.todo.security.datails.AuthenticatedUser;
 
 public interface AddressesService {
 
-    AddressDto createAddress (NewAddressDto newAddress, AuthenticatedUser currentUser);
+    AddressDto createAddress(NewAddressDto newAddress, AuthenticatedUser currentUser);
 
-    AddressDto updateAddress (NewAddressDto newAddress, String id);
+    AddressDto updateAddress(NewAddressDto newAddress, String id);
 
-    AddressDto deleteAddress (String id, AuthenticatedUser currentUser);
+    AddressDto deleteAddress(String id, AuthenticatedUser currentUser);
 
-    AddressesPage getAddressesByUser (AuthenticatedUser currentUser);
+    AddressesPage getAddressesByUser(AuthenticatedUser currentUser);
 }

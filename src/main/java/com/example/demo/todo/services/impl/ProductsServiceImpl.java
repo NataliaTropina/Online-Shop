@@ -24,33 +24,22 @@ public class ProductsServiceImpl implements ProductService {
 
     @Override
     public ProductPage getAll() {
-       List<Product> products =  productsRepository.findAll();
+        List<Product> products = productsRepository.findAll();
 
-         return ProductPage.builder().data(ProductDto.from(products)).build();
+        return ProductPage.builder().data(ProductDto.from(products)).build();
     }
 
     @Override
     public ProductDto createProduct(NewProductDto newProduct) {
 
-        Category category = categoriesRepository.findById(newProduct.getCategoryId())
-                .orElseThrow(() -> new NotFoundException("Category not found"));
+        Category category = categoriesRepository.findById(newProduct.getCategoryId()).orElseThrow(() -> new NotFoundException("Category not found"));
 
-        Product product = Product.builder()
-                .name(newProduct.getName())
-                .description(newProduct.getDescription())
-                .country(newProduct.getCountry())
-                .imageURL(newProduct.getImageURL())
-                .category(category)
-                .price(newProduct.getPrice())
-                .quantity(newProduct.getQuantity())
-                .build();
+        Product product = Product.builder().name(newProduct.getName()).description(newProduct.getDescription()).country(newProduct.getCountry()).imageURL(newProduct.getImageURL()).category(category).price(newProduct.getPrice()).quantity(newProduct.getQuantity()).build();
 
         category.getProducts().add(product);
 
         productsRepository.save(product);
         categoriesRepository.save(category);
-
-
 
 
         return ProductDto.from(product);
@@ -59,10 +48,7 @@ public class ProductsServiceImpl implements ProductService {
     @Override
     public ProductDto deleteProduct(String productId) {
 
-        Product product = productsRepository.findById(productId)
-                        .orElseThrow(()->
-                                new NotFoundException("Product with id <" + productId + "> not found")
-                                );
+        Product product = productsRepository.findById(productId).orElseThrow(() -> new NotFoundException("Product with id <" + productId + "> not found"));
 
         productsRepository.delete(product);
 
@@ -72,14 +58,9 @@ public class ProductsServiceImpl implements ProductService {
     @Override
     public ProductDto updateProduct(String productId, NewProductDto newProduct) {
 
-        Product product = productsRepository.findById(productId)
-                        .orElseThrow(()->
-                                new NotFoundException("Product with id <" + productId + "> not found"));
+        Product product = productsRepository.findById(productId).orElseThrow(() -> new NotFoundException("Product with id <" + productId + "> not found"));
 
-        Category category = categoriesRepository.findById(newProduct.getCategoryId())
-                        .orElseThrow(()->
-                                new NotFoundException("Category not found")
-                                );
+        Category category = categoriesRepository.findById(newProduct.getCategoryId()).orElseThrow(() -> new NotFoundException("Category not found"));
 
         product.setName(newProduct.getName());
         product.setDescription(newProduct.getDescription());
@@ -91,15 +72,13 @@ public class ProductsServiceImpl implements ProductService {
 
         productsRepository.save(product);
 
-
         return ProductDto.from(product);
     }
 
     @Override
     public ProductDto getById(String productId) {
 
-        Product product = productsRepository.findById(productId)
-                .orElseThrow(()-> new NotFoundException("Product with id <" + productId + "> not found"));
+        Product product = productsRepository.findById(productId).orElseThrow(() -> new NotFoundException("Product with id <" + productId + "> not found"));
 
         return ProductDto.from(product);
     }
@@ -109,9 +88,7 @@ public class ProductsServiceImpl implements ProductService {
 
         List<Product> productsByName = productsRepository.findAllByName(name);
 
-        return ProductPage.builder()
-                .data(ProductDto.from(productsByName))
-                .build();
+        return ProductPage.builder().data(ProductDto.from(productsByName)).build();
     }
 
     @Override
@@ -119,9 +96,7 @@ public class ProductsServiceImpl implements ProductService {
 
         List<Product> productsByCategory = productsRepository.findAllByCategory(category);
 
-        return ProductPage.builder()
-                .data(ProductDto.from(productsByCategory))
-                .build();
+        return ProductPage.builder().data(ProductDto.from(productsByCategory)).build();
     }
 
     @Override
@@ -129,8 +104,6 @@ public class ProductsServiceImpl implements ProductService {
 
         List<Product> productsByPrice = productsRepository.findAllByPriceBetween(startPrice, endPrice);
 
-        return ProductPage.builder()
-                .data(ProductDto.from(productsByPrice))
-                .build();
+        return ProductPage.builder().data(ProductDto.from(productsByPrice)).build();
     }
 }

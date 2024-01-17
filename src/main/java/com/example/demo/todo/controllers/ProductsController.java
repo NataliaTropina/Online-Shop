@@ -10,15 +10,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
 public class ProductsController implements ProductsApi {
 
     public final ProductService productService;
-    public ProductPage getAll(){
-    return productService.getAll();
+
+    public ProductPage getAll() {
+        return productService.getAll();
     }
 
     @Override
@@ -61,6 +60,4 @@ public class ProductsController implements ProductsApi {
     public ProductPage priceFilter(double startPrice, double endPrice) {
         return productService.priceFilter(startPrice, endPrice);
     }
-
-
 }

@@ -21,9 +21,7 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
     @Override
     public MongoClient mongoClient() {
         ConnectionString connectionString = new ConnectionString("mongodb+srv://Natalia:MkyW7ASBB9ruBM3N@cluster0.xw8egxk.mongodb.net/chatbot?retryWrites=true&w=majority");
-        MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
-                .applyConnectionString(connectionString)
-                .build();
+        MongoClientSettings mongoClientSettings = MongoClientSettings.builder().applyConnectionString(connectionString).build();
 
         return MongoClients.create(mongoClientSettings);
     }

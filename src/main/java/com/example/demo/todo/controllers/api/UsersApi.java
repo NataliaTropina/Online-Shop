@@ -55,8 +55,8 @@ public interface UsersApi {
             )
     })
 
-    @GetMapping(value = "")
-    ResponseEntity<UsersPage> getAll();
+    @GetMapping(value = "/by/{role}")
+    ResponseEntity<UsersPage> getAll(@PathVariable("role") String role);
 
 
     @Operation(summary = "Delete user by ID", description = "Accessible only to administrators")

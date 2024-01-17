@@ -4,23 +4,21 @@ import com.example.demo.todo.dto.NewProductDto;
 import com.example.demo.todo.dto.ProductDto;
 import com.example.demo.todo.dto.ProductPage;
 
-import java.util.List;
-
-public interface ProductService  {
+public interface ProductService {
 
     ProductPage getAll();
 
-    ProductDto createProduct (NewProductDto newProduct);
+    ProductDto createProduct(NewProductDto newProduct);
 
-    ProductDto deleteProduct (String productId);
+    ProductDto deleteProduct(String productId);
 
-    ProductDto updateProduct (String productId, NewProductDto newProduct);
+    ProductDto updateProduct(String productId, NewProductDto newProduct);
 
-    ProductDto getById (String productId);
+    ProductDto getById(String productId);
 
-    ProductPage nameFilter (String name);
+    ProductPage nameFilter(String name);
 
-    ProductPage categoryFilter (String category);
+    ProductPage categoryFilter(String category);
 
-    ProductPage priceFilter (double startPrice, double endPrice);
+    ProductPage priceFilter(double startPrice, double endPrice);
 }

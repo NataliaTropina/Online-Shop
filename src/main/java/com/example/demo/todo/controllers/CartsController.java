@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CartsController implements CartsApi {
 
     private final CartsService cartService;
+
     @Override
     @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<CartDto> addToCart(AuthenticatedUser currentUser, NewCartDto newCart) {

@@ -5,8 +5,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Objects;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,16 +22,4 @@ public class Address {
     private String postcode;
     @DBRef
     private User user;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Address address)) return false;
-        return Objects.equals(getId(), address.getId()) && Objects.equals(getStreet(), address.getStreet()) && Objects.equals(getHouseNumber(), address.getHouseNumber()) && Objects.equals(getCity(), address.getCity()) && Objects.equals(getCountry(), address.getCountry()) && Objects.equals(getPostcode(), address.getPostcode()) && Objects.equals(getUser(), address.getUser());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getStreet(), getHouseNumber(), getCity(), getCountry(), getPostcode(), getUser());
-    }
 }

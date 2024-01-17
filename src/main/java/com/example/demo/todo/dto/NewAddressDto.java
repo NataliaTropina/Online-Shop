@@ -16,5 +16,4 @@ public class NewAddressDto {
     private String city;
     private String Country;
     private String postcode;
-
 }

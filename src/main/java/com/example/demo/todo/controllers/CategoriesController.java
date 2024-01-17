@@ -19,19 +19,14 @@ public class CategoriesController implements CategoriesApi {
 
     @Override
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<CategoryDto> createCategory (NewCategoryDto newCategory){
-        return ResponseEntity
-                .status(201)
-                .body(categoriesService.createCategory(newCategory));
+    public ResponseEntity<CategoryDto> createCategory(NewCategoryDto newCategory) {
+        return ResponseEntity.status(201).body(categoriesService.createCategory(newCategory));
     }
 
     @Override
     @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     public ResponseEntity<CategoryDto> updateCategoryById(NewCategoryDto newCategoryDto, String id) {
-        return ResponseEntity
-                .status(201)
-                .body(categoriesService.updateCategoryById(newCategoryDto, id));
-
+        return ResponseEntity.status(201).body(categoriesService.updateCategoryById(newCategoryDto, id));
     }
 
     @Override

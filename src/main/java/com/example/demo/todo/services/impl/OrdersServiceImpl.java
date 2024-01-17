@@ -1,13 +1,20 @@
 package com.example.demo.todo.services.impl;
 
-import com.example.demo.todo.dto.*;
+import com.example.demo.todo.dto.NewAddressDto;
+import com.example.demo.todo.dto.NewOrderDto;
+import com.example.demo.todo.dto.OrderDto;
+import com.example.demo.todo.dto.OrdersPage;
 import com.example.demo.todo.exceptions.NotFoundException;
 import com.example.demo.todo.models.*;
-import com.example.demo.todo.repositories.*;
+import com.example.demo.todo.repositories.CartRepository;
+import com.example.demo.todo.repositories.OrdersRepository;
+import com.example.demo.todo.repositories.ProductsRepository;
+import com.example.demo.todo.repositories.UsersRepository;
 import com.example.demo.todo.security.datails.AuthenticatedUser;
 import com.example.demo.todo.services.OrdersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -16,11 +23,8 @@ import java.util.List;
 public class OrdersServiceImpl implements OrdersService {
 
     private final OrdersRepository ordersRepository;
-
     private final UsersRepository usersRepository;
-
     private final ProductsRepository productsRepository;
-
     private final CartRepository cartRepository;
 
     @Override
@@ -28,7 +32,6 @@ public class OrdersServiceImpl implements OrdersService {
 
         // Retrieving the user and creating an address
         User user = getUserWithAddress(currentUser, new NewAddressDto());
-
 
         // Checking the user's cart
         checkUserCart(user);
@@ -46,10 +49,10 @@ public class OrdersServiceImpl implements OrdersService {
         return OrderDto.from(order);
     }
 
-    private User getUserWithAddress (AuthenticatedUser currentUser, NewAddressDto newAddress){
+    private User getUserWithAddress(AuthenticatedUser currentUser, NewAddressDto newAddress) {
 
         User user = usersRepository.findById(currentUser.getUser().getId())
-                .orElseThrow(()-> new NotFoundException("User with id <" + currentUser.getUser().getId() + "> not found"));
+                .orElseThrow(() -> new NotFoundException("User with id <" + currentUser.getUser().getId() + "> not found"));
 
         if (user.getAddresses() == null || user.getAddresses().isEmpty()) {
             throw new IllegalStateException("User address is missing. Cannot create order without an address.");
@@ -59,14 +62,14 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
 
-    private void checkUserCart (User user){
+    private void checkUserCart(User user) {
 
-        if (user.getCart() == null || user.getCart().getCartDetails() == null || user.getCart().getCartDetails().isEmpty()){
+        if (user.getCart() == null || user.getCart().getCartDetails() == null || user.getCart().getCartDetails().isEmpty()) {
             throw new NotFoundException("Cart is Empty");
         }
     }
 
-    private double countTotalOrderPrice (Cart userCart){
+    private double countTotalOrderPrice(Cart userCart) {
 
         double totalOrderPrice = 0.0;
 
@@ -78,7 +81,7 @@ public class OrdersServiceImpl implements OrdersService {
                     .orElseThrow(() ->
                             new NotFoundException("Product with id <" + cartDetails.getProductId() + "> not found")
                     );
-            if (product.getQuantity() < cartDetails.getQuantity()){
+            if (product.getQuantity() < cartDetails.getQuantity()) {
                 throw new IllegalArgumentException("Insufficient quantity for product with id <" + product.getId() + ">");
             }
             product.setQuantity(product.getQuantity() - cartDetails.getQuantity());
@@ -109,8 +112,7 @@ public class OrdersServiceImpl implements OrdersService {
         return order;
     }
 
-    private void saveOrderAndHandleData(Cart userCart){
-
+    private void saveOrderAndHandleData(Cart userCart) {
 
 
         //userCart.getCartDetails().clear();
@@ -157,16 +159,16 @@ public class OrdersServiceImpl implements OrdersService {
         return OrderDto.from(order);
     }
 
-        @Override
-        public OrderDto deleteById (String id){
+    @Override
+    public OrderDto deleteById(String id) {
 
-            Order order = ordersRepository.findById(id)
-                    .orElseThrow(() ->
-                            new NotFoundException("Order with id <" + id + "> not found")
-                    );
+        Order order = ordersRepository.findById(id)
+                .orElseThrow(() ->
+                        new NotFoundException("Order with id <" + id + "> not found")
+                );
 
-            ordersRepository.deleteById(id);
+        ordersRepository.deleteById(id);
 
-            return OrderDto.from(order);
-        }
+        return OrderDto.from(order);
+    }
 }

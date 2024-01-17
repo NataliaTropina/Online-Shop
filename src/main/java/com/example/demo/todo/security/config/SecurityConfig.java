@@ -2,7 +2,6 @@ package com.example.demo.todo.security.config;
 
 import com.example.demo.todo.dto.StandardResponseDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import javax.servlet.http.HttpServletResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -17,6 +16,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import javax.servlet.http.HttpServletResponse;
 
 @RequiredArgsConstructor
 @EnableWebSecurity

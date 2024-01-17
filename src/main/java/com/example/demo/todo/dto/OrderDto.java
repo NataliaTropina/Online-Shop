@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,7 +24,7 @@ public class OrderDto {
     private double totalPrice;
     private Order.Status status;
 
-    public static OrderDto from (Order order) {
+    public static OrderDto from(Order order) {
         return OrderDto.builder()
                 .id(order.getId())
                 .userId(order.getUser().getId())
@@ -34,7 +35,7 @@ public class OrderDto {
                 .build();
     }
 
-    public static List<OrderDto> from (List<Order> orders){
+    public static List<OrderDto> from(List<Order> orders) {
 
         return orders.stream().map(OrderDto::from).collect(Collectors.toList());
     }

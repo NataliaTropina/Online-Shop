@@ -1,12 +1,10 @@
 package com.example.demo.todo.dto;
 
 import com.example.demo.todo.models.Address;
-import com.example.demo.todo.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,8 +22,7 @@ public class AddressDto {
     private String postcode;
     private String userId;
 
-
-    public static AddressDto from (Address address) {
+    public static AddressDto from(Address address) {
 
         return AddressDto.builder()
                 .id(address.getId())
@@ -37,10 +34,8 @@ public class AddressDto {
                 .userId(address.getUser().getId())
                 .build();
     }
-
-    public static List<AddressDto> from (List<Address> addresses){
+    public static List<AddressDto> from(List<Address> addresses) {
 
         return addresses.stream().map(AddressDto::from).collect(Collectors.toList());
     }
-
 }

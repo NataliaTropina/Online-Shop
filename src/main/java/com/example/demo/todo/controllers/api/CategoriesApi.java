@@ -3,7 +3,6 @@ package com.example.demo.todo.controllers.api;
 import com.example.demo.todo.dto.CategoriesPage;
 import com.example.demo.todo.dto.CategoryDto;
 import com.example.demo.todo.dto.NewCategoryDto;
-import com.example.demo.todo.dto.OrderDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -32,7 +31,7 @@ public interface CategoriesApi {
     })
 
     @PostMapping
-    ResponseEntity<CategoryDto> createCategory (@RequestBody NewCategoryDto newCategory);
+    ResponseEntity<CategoryDto> createCategory(@RequestBody NewCategoryDto newCategory);
 
     @Operation(summary = "Update category")
     @ApiResponses(value = {
@@ -46,7 +45,7 @@ public interface CategoriesApi {
 
 
     @PutMapping(value = "/{id}")
-    ResponseEntity<CategoryDto> updateCategoryById (@RequestBody NewCategoryDto newCategoryDto,@PathVariable String id);
+    ResponseEntity<CategoryDto> updateCategoryById(@RequestBody NewCategoryDto newCategoryDto, @PathVariable String id);
 
     @Operation(summary = "Access to all categories", description = "available to administrator and user")
     @ApiResponses(value = {
@@ -59,7 +58,7 @@ public interface CategoriesApi {
     })
 
     @GetMapping
-    CategoriesPage getAll ();
+    CategoriesPage getAll();
 
     @Operation(summary = "Access to category by id", description = "available to administrator and user")
     @ApiResponses(value = {
@@ -73,7 +72,7 @@ public interface CategoriesApi {
 
 
     @GetMapping(value = "/{id}")
-    ResponseEntity<CategoryDto> getById (@PathVariable String id);
+    ResponseEntity<CategoryDto> getById(@PathVariable String id);
 
     @Operation(summary = "Delete category by id", description = "available only to administrator")
     @ApiResponses(value = {
@@ -86,5 +85,5 @@ public interface CategoriesApi {
     })
 
     @DeleteMapping(value = "/{id}")
-    ResponseEntity<CategoryDto> deleteCategory (@PathVariable String id);
+    ResponseEntity<CategoryDto> deleteCategory(@PathVariable String id);
 }

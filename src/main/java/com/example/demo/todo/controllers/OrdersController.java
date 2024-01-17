@@ -1,7 +1,6 @@
 package com.example.demo.todo.controllers;
 
 import com.example.demo.todo.controllers.api.OrdersApi;
-import com.example.demo.todo.dto.NewAddressDto;
 import com.example.demo.todo.dto.NewOrderDto;
 import com.example.demo.todo.dto.OrderDto;
 import com.example.demo.todo.dto.OrdersPage;
@@ -11,8 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -47,9 +44,8 @@ public class OrdersController implements OrdersApi {
                 .status(201)
                 .body(ordersService.updateOrder(id, currentUser, newOrder
                 ));
-    }
 
-    @Override
+    }@Override
     @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     public ResponseEntity<OrderDto> deleteOrderById(String id) {
         return ResponseEntity.ok(ordersService.deleteById(id));

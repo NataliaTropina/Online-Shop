@@ -1,6 +1,8 @@
 package com.example.demo.todo.controllers.api;
 
-import com.example.demo.todo.dto.*;
+import com.example.demo.todo.dto.NewOrderDto;
+import com.example.demo.todo.dto.OrderDto;
+import com.example.demo.todo.dto.OrdersPage;
 import com.example.demo.todo.security.datails.AuthenticatedUser;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -13,8 +15,6 @@ import io.swagger.v3.oas.annotations.tags.Tags;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Tags(value = {
         @Tag(name = "Orders")
@@ -33,8 +33,8 @@ public interface OrdersApi {
     })
 
     @PostMapping
-    ResponseEntity<OrderDto> createOrder (@Parameter(hidden = true)
-                                          @AuthenticationPrincipal AuthenticatedUser currentUser);
+    ResponseEntity<OrderDto> createOrder(@Parameter(hidden = true)
+                                         @AuthenticationPrincipal AuthenticatedUser currentUser);
 
     @Operation(summary = "Get list of all orders", description = "accessible only to administrators")
     @ApiResponses(value = {
@@ -47,7 +47,7 @@ public interface OrdersApi {
     })
 
     @GetMapping
-    OrdersPage getAll ();
+    OrdersPage getAll();
 
     @Operation(summary = "Get order by ID", description = "accessible only to administrators")
     @ApiResponses(value = {
@@ -60,7 +60,7 @@ public interface OrdersApi {
     })
 
     @GetMapping(value = "/{id}")
-    OrderDto getById (@PathVariable("id") String id);
+    OrderDto getById(@PathVariable("id") String id);
 
     @Operation(summary = "Update order")
     @ApiResponses(value = {
@@ -73,10 +73,10 @@ public interface OrdersApi {
     })
 
     @PutMapping(value = "/{id}")
-    ResponseEntity<OrderDto> updateOrder (@PathVariable("id") String id,
-                                          @Parameter(hidden = true)
-                                          @AuthenticationPrincipal AuthenticatedUser currentUser,
-                                          @RequestBody NewOrderDto newOrder);
+    ResponseEntity<OrderDto> updateOrder(@PathVariable("id") String id,
+                                         @Parameter(hidden = true)
+                                         @AuthenticationPrincipal AuthenticatedUser currentUser,
+                                         @RequestBody NewOrderDto newOrder);
 
 
     @Operation(summary = "Delete order")
@@ -90,5 +90,5 @@ public interface OrdersApi {
     })
 
     @DeleteMapping(value = ("/{id}"))
-    ResponseEntity<OrderDto> deleteOrderById (@PathVariable("id") String id);
+    ResponseEntity<OrderDto> deleteOrderById(@PathVariable("id") String id);
 }

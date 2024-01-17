@@ -11,13 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 public class SignUpController implements SignUpApi {
-
     private final SignUpService signUpService;
 
     @Override
     public ResponseEntity<UserDto> signUp(NewUserDto newUser) {
-        return ResponseEntity
-                .status(201)
-                .body(signUpService.signUp(newUser));
+        return ResponseEntity.status(201).body(signUpService.signUp(newUser));
     }
 }

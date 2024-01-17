@@ -11,19 +11,17 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 
-    @RequiredArgsConstructor
-    @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-    @Service
-    public class UserDetailsServiceImpl implements UserDetailsService {
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@Service
+public class UserDetailsServiceImpl implements UserDetailsService {
 
-        UsersRepository usersRepository;
+    UsersRepository usersRepository;
 
-        @Override
-        public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-            User user = usersRepository.findByEmail(email).orElseThrow(
-                    () -> new UsernameNotFoundException("User <" + email + "> not found"));
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = usersRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User <" + email + "> not found"));
 
-            return new AuthenticatedUser(user);
-        }
+        return new AuthenticatedUser(user);
     }
-
+}

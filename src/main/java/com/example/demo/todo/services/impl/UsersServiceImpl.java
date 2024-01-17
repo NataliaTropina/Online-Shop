@@ -32,8 +32,8 @@ public class UsersServiceImpl implements UsersService {
                 .build();
     }
     @Override
-    public UsersPage getAll() {
-        List<User> users = usersRepository.findAll();
+    public UsersPage getAll(String role) {
+        List<User> users = usersRepository.findAllByRole(role);
         return UsersPage.builder()
                 .data(UserDto.from(users))
                 .build();
@@ -68,9 +68,7 @@ public class UsersServiceImpl implements UsersService {
 
         User user = usersRepository.findById(userId)
                 .orElseThrow(() ->
-                        new NotFoundException("user with id <" + userId + "> not found")
-
-                );
+                        new NotFoundException("user with id <" + userId + "> not found"));
 
         user.setFirstName(newUserDto.getFirstName());
         user.setLastName(newUserDto.getLastName());
